@@ -29,19 +29,19 @@ struct TrieNode *add(struct TrieNode *pNode, char c){
   /* Find child node */
   switch (c) {
   case 'A':
-    pNext = @(pNode->a);
+    pNext = &(pNode->a);
     break;
 
   case 'C':
-    pNext = @(pNode->c);
+    pNext = &(pNode->c);
     break;
 
   case 'G':
-    pNext = @(pNode->g);
+    pNext = &(pNode->g);
     break;
 
   case 'T':
-    pNext = @(pNode->t);
+    pNext = &(pNode->t);
     break;
 
   default:

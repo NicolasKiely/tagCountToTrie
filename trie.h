@@ -10,10 +10,10 @@
 
 /* Trie Node */
 struct TrieNode {
-  struct Trie *a;
-  struct Trie *t;
-  struct Trie *g;
-  struct Trie *c;
+  struct TrieNode *a;
+  struct TrieNode *t;
+  struct TrieNode *g;
+  struct TrieNode *c;
   
   struct TrieLeaf *pLeaf;
 };
@@ -39,6 +39,6 @@ struct TrieNode *initNode();
 struct TrieNode *add(struct TrieNode *pNode, char c);
 
 /* Recursively frees a trie. Will set the pointer to null */
-void freeTrie(struct **TrieNode ppRoot);
+void freeTrie(struct TrieNode **ppRoot);
 
 #endif

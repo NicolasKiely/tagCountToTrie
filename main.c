@@ -30,8 +30,8 @@ int main(int argc, char *argv[]){
   outNm = argv[2];
 
   /* Attempt to open files */
-  *fIn = fopen(inNm, "r");
-  *fOut = fopen(outNm, "w");
+  fIn = fopen(inNm, "r");
+  fOut = fopen(outNm, "w");
   
   if (fIn == NULL || fOut == NULL){
     cleanFileHandles(&fIn, &fOut);
@@ -57,6 +57,11 @@ int main(int argc, char *argv[]){
     /* Copy over character */
     fprintf(fOut, "%c", c);
   }
+  
+  
+  /* Done */
+  cleanFileHandles(&fIn, &fOut);
+  return 0;
 }
 
 

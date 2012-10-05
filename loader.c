@@ -19,7 +19,6 @@ struct TrieNode *loadTagCountFile(FILE *fIn){
 	/* Initialize the trie and point the working node to it */
 	pRoot = initNode();
 	if (pRoot == NULL) return NULL;
-	pNode = pRoot;
 
 
 	/* Loop through each line */
@@ -27,7 +26,7 @@ struct TrieNode *loadTagCountFile(FILE *fIn){
 	
 		/* Loop through each character in the tag */
 		pNode = pRoot;
-		for (c = fgetc(); c=='A'||c=='C'||c=='G'||c=='T'; c = fgetc()){
+		for (c = fgetc(fIn); c=='A'||c=='C'||c=='G'||c=='T'; c = fgetc(fIn)){
 			/* Add the character to the trie and update the node */
 			pNode = add(pNode, c);
 			
@@ -41,7 +40,7 @@ struct TrieNode *loadTagCountFile(FILE *fIn){
 		
 		/* Try to create a new leaf */
 		pNode->pLeaf = malloc(sizeof(*(pNode->pLeaf)));
-		if (pNode-pLeaf == NULL){
+		if (pNode->pLeaf == NULL){
 			/* Couldn't allocate memory for a leaf */
 			printf("Error at line %i, could not add leaf\n", index+1);
 			freeTrie(&pRoot);
@@ -60,7 +59,7 @@ struct TrieNode *loadTagCountFile(FILE *fIn){
 		}
 		
 		/* Read tag length number */
-		for (c == fgetc(); isdigit(c); c == fgetc())
+		for (c = fgetc(fIn); isdigit(c); c = fgetc(fIn))
 			reverseIntegerParser(&(pNode->pLeaf->tagLength), c);
 		
 		if (c == EOF) {
@@ -70,11 +69,11 @@ struct TrieNode *loadTagCountFile(FILE *fIn){
 		}
 		
 		/* Read tag frequency number */
-		for (c == fgetc(); isdigit(c); c == fgetc())
+		for (c = fgetc(fIn); isdigit(c); c = fgetc(fIn))
 			reverseIntegerParser(&(pNode->pLeaf->tagFreq), c);
 		
 		/* Burn through junk after last number */
-		for (; c!=EOF && c!='\n' && c!='\r'; c == fgetc()){;}
+		for (; c!=EOF && c!='\n' && c!='\r'; c = fgetc(fIn)){;}
 		
 		if (c == EOF) {
 			/* Done */
