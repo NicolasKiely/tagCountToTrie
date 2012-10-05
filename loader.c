@@ -37,13 +37,16 @@ struct TrieNode *loadTagCountFile(FILE *fIn){
     if (state == baseChr) {
       if (c == 'A' || c == 'G' || c == 'C' || c == 'T'){
 	/* Keep state, append character to trie ###!!!### */
+	pNode = add(pNode, c);
+
+	if (pNode == NULL) {
 
       } else if (c == '\t') {
 	/* Move to number state */
 	state = sizeNum;
 	for (i = 0; i < 5; i++) numBuf[i] = '0';
 	numBuf[5] = '\0';
-	i = 4;
+	i = 0;
 
       } else if (c == EOF) {
 	/* This may or may not be bad */
