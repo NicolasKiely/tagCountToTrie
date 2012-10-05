@@ -5,6 +5,7 @@
 
 #include "trie.h"
 #include "loader.h"
+#include "output.h"
 
 /* Helper function to clean up main()'s input/output file handles */
 void cleanFileHandles(FILE **in, FILE **out);
@@ -17,7 +18,6 @@ int main(int argc, char *argv[]){
 	char *inNm  = NULL; /* Input file name */
 	char *outNm = NULL; /* Output file name */
 	int c       =    0; /* Generic input character */
-	int i       =    0; /* Generic loop variable */
 	FILE *fIn   = NULL; /* Input file's handle */
 	FILE *fOut  = NULL; /* Output file's handle */
 
@@ -68,6 +68,9 @@ int main(int argc, char *argv[]){
 		printf("Error, loading failed\n");
 		return 1;
 	}
+	
+	/* Output Trie */
+	writeTrieToFile(fOut, pRoot);
   
 	/* Done */
 	cleanFileHandles(&fIn, &fOut);
