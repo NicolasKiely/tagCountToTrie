@@ -26,22 +26,22 @@ void writeTrieToFile(FILE * fOut, struct TrieNode *pNode){
 		if (count > 1) fprintf(fOut, "\n(");
 		
 		if (pNode->a != NULL){
-			fprintf(fOut, "A ");
+			fprintf(fOut, "A");
 			writeTrieToFile(fOut, pNode->a);
 		}
 		
 		if (pNode->c != NULL){
-			fprintf(fOut, "C ");
+			fprintf(fOut, "C");
 			writeTrieToFile(fOut, pNode->c);
 		}
 		
 		if (pNode->g != NULL){
-			fprintf(fOut, "G ");
+			fprintf(fOut, "G");
 			writeTrieToFile(fOut, pNode->g);
 		}
 		
 		if (pNode->t != NULL){
-			fprintf(fOut, "T ");
+			fprintf(fOut, "T");
 			writeTrieToFile(fOut, pNode->t);
 		}
 		
