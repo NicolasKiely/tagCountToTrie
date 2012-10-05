@@ -22,7 +22,7 @@ struct TrieNode *initNode(){
 
 
 struct TrieNode *add(struct TrieNode *pNode, char c){
-  struct *TrieNode **pNext;
+  struct TrieNode **pNext;
 
   if (pNode == NULL) return NULL;
 
@@ -57,23 +57,23 @@ struct TrieNode *add(struct TrieNode *pNode, char c){
 
 
 void freeTrie(struct TrieNode **ppRoot){
-	struct TrieNode *pRoot;
+  struct TrieNode *pRoot;
 	
-	if (ppRoot == NULL) return;
+  if (ppRoot == NULL) return;
 	
-	/* Step pointer down */
-	pRoot = *ppRoot;
-	if (pRoot == NULL) return;
+  /* Step pointer down */
+  pRoot = *ppRoot;
+  if (pRoot == NULL) return;
 	
-	/* Free child nodes */
-	freeTrie(&(pRoot->a));
-	freeTrie(&(pRoot->c));
-	freeTrie(&(pRoot->g));
-	freeTrie(&(pRoot->t));
+  /* Free child nodes */
+  freeTrie(&(pRoot->a));
+  freeTrie(&(pRoot->c));
+  freeTrie(&(pRoot->g));
+  freeTrie(&(pRoot->t));
 	
-	/* Free leaf */
-	if (pRoot->pLeaf != NULL) free(pRoot->pLeaf);
+  /* Free leaf */
+  if (pRoot->pLeaf != NULL) free(pRoot->pLeaf);
 	
-	/* Reset original pointer */
-	*ppRoot = NULL;
+  /* Reset original pointer */
+  *ppRoot = NULL;
 }
