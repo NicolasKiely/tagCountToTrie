@@ -31,10 +31,13 @@ struct TrieNode *loadTagCountFile(FILE *fIn);
 /* Returns a newly created trie node */
 struct TrieNode *initNode();
 
-
 /* Checks to see if a node has a child node of character c.
    If found, returns that node, otherwise returns a newly created
    node for the character.
 */
 struct TrieNode *add(struct TrieNode *pNode, char c);
+
+/* Recursively frees a trie. Will set the pointer to null */
+void freeTrie(struct **TrieNode ppRoot);
+
 #endif
