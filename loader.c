@@ -1,8 +1,11 @@
+/* Source code for parsing tag count files */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 
 #include "trie.h"
+#include "loader.h"
 
 
 struct TrieNode *loadTagCountFile(FILE *fIn){
