@@ -29,6 +29,31 @@ struct TrieLeaf {
 };
 
 
+/* Used for calculating size of trie */
+struct TrieStat {
+	/* Total amount of memory used */
+	int totalSize;
+	
+	/* Memory used by nodes */
+	int nodeSize;
+	
+	/* Number of nodes used, not counting root */
+	int usedNodes;
+	
+	/* Number of nodes used and unused, not counting root */
+	int totalNodes;
+	
+	/* Memory used for leaves */
+	int leafSize;
+	
+	/* Leaf nodes used */
+	int usedLeaves;
+	
+	/* Total number of leaves */
+	int totalLeaves;
+};
+
+
 /* Returns a newly created trie node */
 struct TrieNode *initNode();
 
@@ -40,5 +65,11 @@ struct TrieNode *add(struct TrieNode *pNode, char c);
 
 /* Recursively frees a trie. Will set the pointer to null */
 void freeTrie(struct TrieNode **ppRoot);
+
+/* Returns the memory usage of a trie sturcture */
+struct TrieStat getMemStat(struct TrieNode *pRoot);
+
+/* Recursively calculates node's and child nodes' memory stats */
+void calcMemStat(struct TrieNode *pNode, struct TrieStat *pStat);
 
 #endif

@@ -77,3 +77,45 @@ void freeTrie(struct TrieNode **ppRoot){
   /* Reset original pointer */
   *ppRoot = NULL;
 }
+
+
+struct TrieStat getMemStat(struct TrieNode *pRoot){
+	struct TrieStat stat;
+	
+	/* Initialize stats */
+	stat.totalSize   = 0;
+	stat.nodeSize    = 0;
+	stat.usedNodes   = 0;
+	stat.totalNodes  = 0;
+	stat.leafSize    = 0;
+	stat.usedLeaves  = 0;
+	stat.totalLeaves = 0;
+	
+	/* Calculate */
+	calcMemStat(pRoot, &stat);
+	
+	return stat;
+}
+
+
+void calcMemStat(struct TrieNode *pNode, struct TrieStat *pStat){
+	/* Add node's own memory size to stats */
+	pStat->totalSize += sizeof(*pNode);
+	pStat->nodeSize += sizeof(*pNode);
+	pStat->usedNodes += 1;
+	pStat->totalNodes += 4;
+	
+	/* Add leaf stats */
+	pStat->totalLeaves++;
+	if (pNode->pLeaf != NULL){
+		pStat->totalSize += sizeof(*pNode->pLeaf);
+		pStat->leafSize += sizeof(*pNode->pLeaf);
+		pStat->usedLeaves++;
+	}
+	
+	/* Add child node stats */
+	if (pNode->a != NULL) calcMemStat(pNode->a, pStat);
+	if (pNode->t != NULL) calcMemStat(pNode->t, pStat);
+	if (pNode->g != NULL) calcMemStat(pNode->g, pStat);
+	if (pNode->c != NULL) calcMemStat(pNode->c, pStat);
+}
